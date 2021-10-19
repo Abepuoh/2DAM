@@ -1,18 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include <unistd.h> //Para fork()
+#include <errno.h>
 #include <sys/wait.h>
-#include <sys/types.h>
 
-int main()
-{
-    int c;
-    int a;
-    int status;
-    pid_t pid;
-
-    printf("Padre con ID %d comienza:\n", getpid());
+ printf("Padre con ID %d comienza:\n", getpid());
 
     for (c = 0; c < 3; c++)
     {
@@ -34,14 +26,3 @@ int main()
             exit(0);
         }
     }
-
-    printf(" \nPadre esperando a los hijos \n");
-    pid = wait(NULL);
-    while (pid != -1)
-    {
-        pid = wait(NULL);
-    }
-    printf("\nTodos los hijos han terminado han terminado\n");
-
-    return 0;
-}

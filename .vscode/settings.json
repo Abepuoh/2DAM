@@ -1,5 +1,15 @@
 {
     "files.associations": {
-        "wait.h": "c"
-    }
+        "wait.h": "c",
+        "string.h": "c",
+        "EJ3.C": "cpp",
+        "EJ4.C": "cpp",
+        "EJ5.C": "cpp",
+        "EJ6.C": "cpp",
+        "EJ7.C": "cpp",
+        "types.h": "c",
+        "features.h": "c",
+        "stubs.h": "c"
+    },
+    "cmake.configureOnOpen": false
 }

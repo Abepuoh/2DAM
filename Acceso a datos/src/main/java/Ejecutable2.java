@@ -1,5 +1,3 @@
-import java.util.List;
-
 import DAO.MariaDB.SedeDAOImpMariaDB;
 import DAO.model.Sede;
 

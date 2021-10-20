@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,9 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	public SedeDAOImpMariaDB(int id, String nombre, float presupuesto, int ncomplejos) {
 		super(id, nombre, presupuesto, ncomplejos);
 	}
+
 	public SedeDAOImpMariaDB(Sede s) {
-		super(s.getId(),s.getNombre(),s.getPresupuesto(),s.getNcomplejos());
+		super(s.getId(), s.getNombre(), s.getPresupuesto(), s.getNcomplejos());
 	}
 
 	public void guardar() {
@@ -46,8 +46,8 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 		} else {
 			con = MariaDBConexion.getConexion();
 			if (con != null) {
-				PreparedStatement ps=null;
-				ResultSet rs=null;
+				PreparedStatement ps = null;
+				ResultSet rs = null;
 				try {
 					ps = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
@@ -68,7 +68,7 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 					try {
 						ps.close();
 						rs.close();
-					}catch (SQLException e) {
+					} catch (SQLException e) {
 						// TODO: handle exception
 					}
 				}
@@ -79,7 +79,7 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	public void editar() {
 		con = MariaDBConexion.getConexion();
 		if (con != null) {
-			PreparedStatement ps=null;
+			PreparedStatement ps = null;
 			try {
 				ps = con.prepareStatement(EDITAR);
 
@@ -94,7 +94,7 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 			} finally {
 				try {
 					ps.close();
-				}catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO: handle exception
 				}
 			}
@@ -105,19 +105,19 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	public void borrar() {
 		con = MariaDBConexion.getConexion();
 		if (con != null) {
-			PreparedStatement ps=null;
+			PreparedStatement ps = null;
 			try {
 				ps = con.prepareStatement(BORRAR);
 				ps.setInt(1, this.id);
 				ps.executeUpdate();
-				this.id=-1;
+				this.id = -1;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				try {
 					ps.close();
-				}catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO: handle exception
 				}
 			}
@@ -126,19 +126,17 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	}
 
 	public List<Sede> mostrarTodos() {
-		List<Sede> resultado=new ArrayList<Sede>();
-		
+		List<Sede> resultado = new ArrayList<Sede>();
+
 		con = MariaDBConexion.getConexion();
 		if (con != null) {
-			PreparedStatement ps=null;
-			ResultSet rs=null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARTODOS);
-				rs=ps.executeQuery();
-				while(rs.next()) {
-					resultado.add(new Sede(rs.getInt("id"),
-							rs.getString("nombre"),
-							rs.getFloat("presupuesto"),
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					resultado.add(new Sede(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("presupuesto"),
 							rs.getInt("ncomplejos")));
 				}
 			} catch (SQLException e) {
@@ -148,7 +146,7 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 				try {
 					ps.close();
 					rs.close();
-				}catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO: handle exception
 				}
 			}
@@ -157,20 +155,18 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	}
 
 	public Sede mostrar(int id) {
-		Sede resultado=new Sede();
-		
+		Sede resultado = new Sede();
+
 		con = MariaDBConexion.getConexion();
 		if (con != null) {
-			PreparedStatement ps=null;
-			ResultSet rs=null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
 			try {
 				ps = con.prepareStatement(MOSTRARPORID);
-				ps.setInt(1,id);
-				rs=ps.executeQuery();
-				if(rs.next()) {
-					resultado=new Sede(rs.getInt("id"),
-							rs.getString("nombre"),
-							rs.getFloat("presupuesto"),
+				ps.setInt(1, id);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					resultado = new Sede(rs.getInt("id"), rs.getString("nombre"), rs.getFloat("presupuesto"),
 							rs.getInt("ncomplejos"));
 				}
 			} catch (SQLException e) {
@@ -180,7 +176,7 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 				try {
 					ps.close();
 					rs.close();
-				}catch (SQLException e) {
+				} catch (SQLException e) {
 					// TODO: handle exception
 				}
 			}
@@ -189,8 +185,33 @@ public class SedeDAOImpMariaDB extends Sede implements SedeDAO {
 	}
 
 	public List<Sede> mostrarPorNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Sede> resultado = new ArrayList <Sede>();
+
+		con = MariaDBConexion.getConexion();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(MOSTRARPORNOMBRE);
+				ps.setString(1, nombre);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					resultado.add(new Sede (rs.getInt("id"), rs.getString("nombre"), rs.getFloat("presupuesto"),
+							rs.getInt("ncomplejos")));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					ps.close();
+					rs.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return resultado;
 	}
 
 }

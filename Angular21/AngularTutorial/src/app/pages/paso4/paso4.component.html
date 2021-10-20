@@ -1,0 +1,37 @@
+<button type="button" class="btn btn-primary"(click)="cargaDatos()">cargar</button>
+<div class="spinner-grow text-primary" role="status" *ngIf= "cargando">
+    <span class="sr-only"> Loading...</span>
+  </div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="puntero" *ngFor="let contacto of this.contactos;index as i" (click)="this.seleccionarContacto(this.contacto)">
+        <th scope="row">{{i+1}}</th>
+        <td>{{contacto.nombre}}</td>
+        <td>{{contacto.telefono}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="card" *ngIf= " this.contactoElegido!=null">
+   <div class= "row">
+        <div class= "col-10 card-header">
+            <h5 class="card-header">Contacto elegido</h5>
+        </div>
+        <div class= "col-2 card-header" style= "text-align: rigth !important;">
+            <button type="button" class="btn-close" aria-label="Close" (click)= "this.deseleccionar()"></button>
+        </div>
+   </div>
+    <div class="card-body">
+      <h5 class="card-title">{{this.contactoElegido.nombre}}</h5>
+      <p class="card-text">{{this.contactoElegido.telefono}}</p>
+      <a href="#" class="btn btn-success">Llamar</a>
+    </div>
+  </div>
+  

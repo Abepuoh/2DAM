@@ -1,0 +1,33 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="puntero" *ngFor="let contacto of this.contactos;index as i" (click)="this.seleccionarContacto(this.contacto)">
+        <th scope="row">{{i+1}}</th>
+        <td>{{contacto.getNombre()}}</td>
+        <td>{{contacto.getTelefono()}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="card" *ngIf= " this.contactoElegido!=null">
+   <div class= "row">
+        <div class= "col-10 card-header">
+            <h5 class="card-header">Contacto elegido</h5>
+        </div>
+        <div class= "col-2 card-header" style= "text-align: rigth !important;">
+            <button type="button" class="btn-close" aria-label="Close" (click)= "this.deseleccionar()"></button>
+        </div>
+   </div>
+    <div class="card-body">
+      <h5 class="card-title">{{this.contactoElegido.getNombre()}}</h5>
+      <p class="card-text">{{this.contactoElegido.getTelefono()}}</p>
+      <a href="#" class="btn btn-success">Llamar</a>
+    </div>
+  </div>
+  

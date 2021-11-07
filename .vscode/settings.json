@@ -9,7 +9,8 @@
         "EJ7.C": "cpp",
         "types.h": "c",
         "features.h": "c",
-        "stubs.h": "c"
+        "stubs.h": "c",
+        "EXAM2.C": "cpp"
     },
     "cmake.configureOnOpen": false
 }

@@ -1,36 +1,43 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Proveedores } from '../shared/proveedores';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProveedoresService {
-  proveedores: any = [
-    {
-      nombre: 'Telefónica',
-      cif: 'B12345678',
-      direccion: 'Paseo de la Castellana, 100',
-      cp: '28.010',
-      localidad: 'Madrid',
-      provincia: 'Madrid',
-      telefono: 911111111,
-      email: 'info@telefonica.com',
-      contacto: 'Juan Pérez',
-    },
-    {
-      nombre: 'Iberdrola',
-      cif: 'B87654321',
-      direccion: 'Príncipe de Vergara, 200',
-      cp: '28.015',
-      localidad: 'Madrid',
-      provincia: 'Madrid',
-      telefono: 922222222,
-      email: 'info@iberdrola.com',
-      contacto: 'Laura Martínez',
-    },
-  ];
-  constructor() {}
+  
+  constructor(private db:AngularFireDatabase) {}
 
-  getProveedores() {
-    return this.proveedores;
+  public addProveedor(proveedor:any):void{
+    this.db.database.ref().child("proveedor").push(proveedor);
   }
+
+  getProveedores(){
+    let result: Proveedores[]= [];
+    this.db.database.ref().child("proveedor").get().then((data)=>{
+      const presupuestos =data.val();
+      for(let presupuesto in presupuestos){
+        result.push({key:presupuesto,...presupuestos[presupuesto]});
+      }
+    })  
+    return result;
+  }
+  
+  async getProovedor(key: string): Promise<firebase.default.database.DataSnapshot> {
+    return this.db.database.ref().child("proveedor").child(key).get();
+  }
+
+  putProveedor(presupuesto:any,key:string){
+    this.db.object("proveedor/"+key).update(presupuesto);
+  }
+
+  delProveedor(id:string){
+    const confirmation = confirm("¿Seguro que quieres borrarlo?");
+    if(confirmation){
+      this.db.database.ref().child("proveedor").child(id).remove();
+    }
+  }
+
 }
+

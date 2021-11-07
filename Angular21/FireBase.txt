@@ -1,0 +1,11 @@
+INSTALAR COSAS DE FIREBASE:
+
+Paso 1) npm install bootstrap firebase @angular/fire --save
+Paso 2) npm install @angular/fire --save
+Paso 3) firebase init 
+    - Please select and option: Use an existing project
+    - What do you want to use as your public directory? dist/?????
+    - Configure as a single-page app (rewrite all urls to /index.html)? Yes
+    - Set up automatic builds and deploys with GitHub? No
+
+Paso 4) ng build -----> deploys

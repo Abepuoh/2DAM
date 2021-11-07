@@ -1,30 +1,30 @@
 package DAO.model;
 
 public class Complejo {
-	private int id;
-	private String nombre;
-	private String localizacion;
-	private String jefe;
-	private float area_total;
-	private boolean tipo;
-	private int id_sede;
+	protected int id;
+	protected String nombre;
+	protected String localizacion;
+	protected String jefe;
+	protected float area_total;
+	protected boolean tipo;
+	protected Sede sede;
 	//private Sede misede;
 	
 	public Complejo() {
-		this(-1,"","","",0,false,-1);
+		this(-1,"","","",0,false,new Sede());
 	}
-	public Complejo(String nombre, String localizacion, String jefe, float area_total, boolean tipo, int id_sede) {
-		this(-1,nombre,localizacion,jefe,area_total,tipo,id_sede);
+	public Complejo(String nombre, String localizacion, String jefe, float area_total, boolean tipo, Sede sede) {
+		this(-1,nombre,localizacion,jefe,area_total,tipo,sede);
 	}
 	public Complejo(int id, String nombre, String localizacion, String jefe, float area_total, boolean tipo,
-			int id_sede) {
+			Sede sede) {
 		this.id = id;
 		this.nombre = nombre;
 		this.localizacion = localizacion;
 		this.jefe = jefe;
 		this.area_total = area_total;
 		this.tipo = tipo;
-		this.id_sede = id_sede;
+		this.sede = sede;
 	}
 	public int getId() {
 		return id;
@@ -62,11 +62,11 @@ public class Complejo {
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
 	}
-	public int getId_sede() {
-		return id_sede;
+	public Sede getSede() {
+		return sede;
 	}
-	public void setId_sede(int id_sede) {
-		this.id_sede = id_sede;
+	public void setSede(Sede id_sede) {
+		this.sede = id_sede;
 	}
 	@Override
 	public int hashCode() {
@@ -91,6 +91,6 @@ public class Complejo {
 	@Override
 	public String toString() {
 		return "Complejo [id=" + id + ", nombre=" + nombre + ", localizacion=" + localizacion + ", jefe=" + jefe
-				+ ", area_total=" + area_total + ", tipo=" + tipo + ", id_sede=" + id_sede + "]";
+				+ ", area_total=" + area_total + ", tipo=" + tipo + ", id_sede=" + sede.getNombre() + "]";
 	}
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddpresComponent } from 'src/app/presupuestos/addpres/addpres.component';
 import { ProveedoresService } from 'src/app/servicios/proveedores.service';
 
 
@@ -10,12 +11,19 @@ import { ProveedoresService } from 'src/app/servicios/proveedores.service';
 })
 export class ProveedoresComponent implements OnInit {
   
-  public proveedores: any;
+  proveedores: any[] = [];
+  proveedor: any;
   
-  constructor( private proveedoresService: ProveedoresService) { } 
+  constructor( private proveedoresService: ProveedoresService) {
+     this.proveedores = this.proveedoresService.getProveedores();
+  } 
  
   ngOnInit(): void {
-    this.proveedores = this.proveedoresService.getProveedores();
+  }
+
+  eliminarProveedores(proveedor: AddpresComponent){
+    this.proveedoresService.delProveedor(proveedor.key);
+    this.proveedor = this.proveedoresService.getProveedores();
   }
 
 }

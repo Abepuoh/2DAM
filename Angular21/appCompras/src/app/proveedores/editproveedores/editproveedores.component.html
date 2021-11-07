@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset 2">
+        <h2>Añadir nuevo proveedor</h2>
+        <form (ngSubmit)="onSubmit()" [formGroup]="proveedorForm" >
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <i class="fa fa-check-circle check" *ngIf="proveedorForm.controls.nombre.valid"></i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.controls.nombre.invalid && proveedorForm.controls.nombre.touched"></i>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                <p class="alert alert-danger"*ngIf="proveedorForm.controls.nombre.invalid &&proveedorForm.controls.nombre.touched">
+                    El campo Nombre es obligatorio.
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="cif">C.I.F.</label>
+                <input type="text" class="form-control"id="cif" formControlName="cif">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" class="form-control"id="direccion" formControlName="direccion">
+            </div>
+            <div class="form-group">
+                <label for="cp">Código Postal</label>
+                <input type="text" class="form-control"id="cp" formControlName="cp">
+            </div>
+            <div class="form-group">
+                <label for="localidad">Localidad</label>
+                <input type="text" class="form-control"id="localidad" formControlName="localidad">
+            </div>
+            <div class="form-group">
+                <label for="provincia">Provincia</label> 
+                <select class="form-control" id="provincia"formControlName="provincia">
+                    <option value="">Seleccione la provincia</option> 
+                    <option *ngFor="let provincia of provincias" [value]="provincia">{{provincia}} 
+  
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="number" class="form-control"id="telefono" formControlName="telefono">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <i class="fa fa-check-circle check" *ngIf="proveedorForm.controls.email.valid"></i>
+              <i class="fa fa-exclamation-circle uncheck" *ngIf="proveedorForm.controls.email.invalid && proveedorForm.controls.email.touched"></i>
+              <input type="text" class="form-control" id="email" formControlName="email">
+              <p class="alert alert-danger"*ngIf="proveedorForm.controls.email.invalid &&proveedorForm.controls.email.touched">
+                  El campo Email es obligatorio.
+              </p>
+          </div>
+            <div class="form-group">
+                <label for="contacto">Persona de contacto</label>
+                <input type="text" class="form-control"id="contacto" formControlName="contacto">
+            </div>
+            <button  type="submit"
+            class="btn btn-primary"
+            [disabled]="!proveedorForm.valid">Añadir Presupuesto</button>
+            <a class="btn btn-primary float-md-right" 
+            routerLink="/proveedores">Regresar al listado</a>
+            <a class="btn btn-danger" routerLink="/proveedores">Cancelar</a>
+            <hr>
+        </form>
+        <hr>
+        <pre>Valor del formulario: {{ proveedorForm.value | json }}</pre>
+        <pre>Status del formulario: {{ proveedorForm.status | json }}</pre>
+        <hr>
+        <pre>{{ proveedor | json }}</pre>
+    </div>
+  </div>

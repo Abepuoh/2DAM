@@ -41,10 +41,14 @@
         <label for="total">Total Factura IVA Incluido</label>
         <input type="number"class="form-control" id="total" formControlName="total" [(ngModel)]="presupuestoForm.value.total" >
         </div>
+      
       <button type="submit"class="btn btn-primary" [disabled]="!presupuestoForm.valid">Añadir Presupuesto</button>
+       <a class="btn btn-danger" routerLink="/presupuestos">Cancelar</a>
+
+      <a class="btn btn-primary float-md-right" routerLink="/presupuestos">Regresar al listado</a> <br>
         <p class="alert alert-danger" *ngIf="!presupuestoForm.valid">
              Por favor complete todos los campos
-         </p> 
+         </p>   
     </form>
     <hr>
         <pre>Valor del formulario: {{ presupuestoForm.value | json }}</pre>

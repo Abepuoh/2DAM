@@ -9,6 +9,8 @@
       <th>Nombre</th>
       <th>Correo Electrónico</th>
       <th>Telefono</th>
+      <th>Añadir</th>
+      <th>Borrar</th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +20,12 @@
         <a href="mailto:{{ proveedor.email }}">{{ proveedor.email }}</a>
       </td>
       <td>{{ proveedor.telefono }}</td>
+      <td>
+        <button type="button" class="btn btn-success" routerLink="/editproveedores/{{ proveedor.key }}">Editar</button>
+        </td>
+      <td>
+        <button type="button" class= "btn btn-danger" (click)="eliminarProveedores(proveedor)">Eliminar</button>
+      </td>
     </tr>
   </tbody>
 </table>

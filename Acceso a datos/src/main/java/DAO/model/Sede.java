@@ -1,10 +1,14 @@
 package DAO.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sede {
 	protected int id;
 	protected String nombre;
 	protected float presupuesto;
 	protected int ncomplejos;
+	protected List<Complejo> complejos;
 	
 	//private Complejo[] miscomplejos;
 	
@@ -12,18 +16,21 @@ public class Sede {
 		id=ncomplejos=-1;
 		presupuesto=0;
 		nombre="";
+		complejos = new ArrayList<Complejo>();
 	}
 	public Sede(String nombre, float presupuesto, int ncomplejos) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.ncomplejos = ncomplejos;
 		id=-1;
+		complejos = new ArrayList<Complejo>();
 	}
 	public Sede(int id, String nombre, float presupuesto, int ncomplejos) {
 		this.id = id;
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.ncomplejos = ncomplejos;
+		complejos = new ArrayList<Complejo>();
 	}
 	public int getId() {
 		return id;
@@ -48,6 +55,13 @@ public class Sede {
 	}
 	public void setNcomplejos(int ncomplejos) {
 		this.ncomplejos = ncomplejos;
+	}
+	
+	public List<Complejo> getComplejos() {
+		return complejos;
+	}
+	public void setComplejos(List<Complejo> complejos) {
+		this.complejos = complejos;
 	}
 	@Override
 	public int hashCode() {

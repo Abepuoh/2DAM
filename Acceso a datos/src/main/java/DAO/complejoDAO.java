@@ -7,5 +7,5 @@ import DAO.model.Sede;
 
 public interface complejoDAO extends IDAO<Complejo> {
 	
-	List<Sede> mostrarPorNombre(String nombre);
+	
 }

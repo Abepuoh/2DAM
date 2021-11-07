@@ -17,7 +17,7 @@
             {
                 pid = wait(NULL);
             }
-            printf("\nTodos los hijos han terminado han terminado\n");
+            printf("\Todos los hijos han terminado han terminado\n");
 
             for (a = 0; a < 3; a++)
             {

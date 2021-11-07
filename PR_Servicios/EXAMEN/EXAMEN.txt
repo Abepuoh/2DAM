@@ -1,0 +1,8 @@
+
+1.El proceso es una ejecución mientras al menos uno de sus hilos de ejecución siga activo, 
+    Todo proceso tiene un número único que lo identifica en el sistema. Su PID.
+
+2.Un hilo es simplemente una tarea que puede ser ejecutada al mismo tiempo que otra tarea. PS comando para ver
+
+Fork con un for que cree n hijos
+
